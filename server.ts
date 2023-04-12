@@ -45,6 +45,28 @@ app.post("/users/register", async (req, res) => {
   res.status(201).json(user);
 });
 
+app.post('/users/login', async(req, res) => {
+    const { email, password } = req.body;
+    
+    // CHECK USER
+    const user = users.find( u => u.email === email);
+    if (!user) {
+        return res.status(400).json('Incorrect email or password')
+    }
+    
+    // CHECK PASSWORD
+    const isAuth = await argon2.verify(user.password, password);
+    if (!isAuth) {
+        return res.status(400).json('Incorrect email or password')
+    }
+
+    // CREATE SESSION/COOKIE
+    req.session!.email = user.email;
+
+    // SEND RESPONS
+    res.status(200).json('Login successful!')
+})
+
 // START THE SERVER
 app.listen(3000, () =>
   console.log("Running on: http://localhost:3000")

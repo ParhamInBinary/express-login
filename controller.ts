@@ -59,9 +59,5 @@ export async function loginUser(
 }
 
 export function getAuth(req: Request, res: Response) {
-  if (!req.session?.email) {
-    return res.status(401).json("You must login!");
-  }
-
   res.status(200).json(req.session);
 }

@@ -2,10 +2,11 @@ import cookieSession from "cookie-session";
 import express from "express";
 import {
   getAllUsers,
-  getAuth,
+  getAuth as getLoggedInUserInfo,
   loginUser,
   registerUser,
 } from "./controller";
+import { authenticateLogin } from "./middlewares";
 
 // SERVER APPLICATION
 const app = express();
@@ -34,7 +35,11 @@ app.post("/users/register", registerUser);
 
 app.post("/users/login", loginUser);
 
-app.get("/users/auth", getAuth);
+app.get(
+  "/users/auth",
+  authenticateLogin,
+  getLoggedInUserInfo
+);
 
 // START THE SERVER
 app.listen(3000, () =>

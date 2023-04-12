@@ -1,3 +1,3 @@
 # express-login
 
-**School exercise **
+**School exercise**

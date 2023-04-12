@@ -7,11 +7,11 @@ const app = express();
 
 // DATABASE
 interface User  {
-    name: string;
+    email: string;
     password: string;
 }
 
-const user: User[] = []
+const users: User[] = []
 
 // GLOBAL MIDDLEWARES
 // 1. json
@@ -25,11 +25,21 @@ app.use(cookieSession({
     maxAge: 1000 * 20,
 }));
 
-
 app.get('/', (req, res) => {
     res.status(200).json("Welcome to my API, please login!")
 });
 
+app.get('/users', (req, res) => {
+    res.status(200).json(users)
+})
+
+app.post('/users/register', (req, res) => {
+    const { email, password } = req.body;
+    const user = { email, password };
+    users.push(user);
+
+    res.status(201).json(user)
+})
 
 // START THE SERVER
 app.listen(3000, () => console.log('Running on: http://localhost:3000'));

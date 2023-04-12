@@ -6,7 +6,7 @@ import {
   loginUser,
   registerUser,
 } from "./controller";
-import { authenticateLogin } from "./middlewares";
+import { authenticateLogin as auth } from "./middlewares";
 
 // SERVER APPLICATION
 const app = express();
@@ -37,7 +37,7 @@ app.post("/users/login", loginUser);
 
 app.get(
   "/users/auth",
-  authenticateLogin,
+  auth,
   getLoggedInUserInfo
 );
 

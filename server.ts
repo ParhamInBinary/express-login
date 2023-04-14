@@ -6,7 +6,7 @@ import {
   loginUser,
   registerUser,
 } from "./controller";
-import { authenticateLogin as auth } from "./middlewares";
+import { auth } from "./middlewares";
 
 // SERVER APPLICATION
 const app = express();

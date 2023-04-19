@@ -2,7 +2,7 @@ import cookieSession from "cookie-session";
 import express from "express";
 import {
   getAllUsers,
-  getAuth as getLoggedInUserInfo,
+  getLoggedInUserInfo,
   loginUser,
   registerUser,
 } from "./controller";
